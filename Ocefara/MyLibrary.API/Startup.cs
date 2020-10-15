@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MyLibrary.API.Infrastructure;
+using MyLibrary.API.Infrastructure.Configurations;
+using MyLibrary.API.Infrastructure.Repositories;
 
 namespace MyLibrary.API
 {
@@ -25,6 +29,14 @@ namespace MyLibrary.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MyLibraryDatabaseConfig>(Configuration.GetSection(nameof(MyLibraryDatabaseConfig)));
+            services.AddSingleton<IMyLibraryDatabaseConfig>(provider =>
+                provider.GetRequiredService<IOptions<MyLibraryDatabaseConfig>>().Value);
+
+            services.AddTransient<IMyLibraryDBContext, MyLibraryDBContext>();
+
+            services.AddScoped<IBookRepository, BookRepository>();
+
             services.AddControllers();
         }
 
