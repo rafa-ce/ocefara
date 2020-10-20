@@ -12,7 +12,7 @@ namespace MyLibrary.FunctionalTests
 
         public DatabaseFixture()
         {
-            _mongoClient = new MongoClient(@"mongodb://...");
+            _mongoClient = new MongoClient(@"mongodb://127.0.0.1:27017");
             _mongoClient.DropDatabase("mylibrary");
             var books = _mongoClient.GetDatabase("mylibrary").GetCollection<Book>("books");
             books.InsertOne(new Book()
