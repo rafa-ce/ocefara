@@ -26,8 +26,10 @@ namespace MyLibrary.API.Controllers
         /// </summary>
         /// <returns>Uma lista de livros</returns>
         /// <response code="200">Retorna uma lista de livros</response>
+        /// <response code="500">Falha no servidor ou no banco de dados</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<Book>), 200)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult<IEnumerable<Book>>> Get()
         {
             try
@@ -45,11 +47,17 @@ namespace MyLibrary.API.Controllers
         /// <summary>
         /// Obter livro pelo ISBN
         /// </summary>
-        /// <param name="isbn"></param>
-        /// <response code="200">Retorna o livro com o ISBN informado</response>
-        /// <response code="400">ISBN não informado</response>
-        /// <response code="404">Não foi encontrado livro com o ISBN informado</response>
+        /// <param name="isbn">ISBN do livro</param>
+        /// <returns>Um livro com o ISBN informado</returns>
+        /// <response code="200">Um livro com o ISBN informado</response>
+        /// <response code="400">ISBN inválido</response>
+        /// <response code="404">Livro não encontrado</response>
+        /// <response code="500">Falha no servidor ou no banco de dados</response>
         [HttpGet("{isbn}")]
+        [ProducesResponseType(typeof(Book), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult<Book>> Get(string isbn)
         {
             if (String.IsNullOrEmpty(isbn))
@@ -73,12 +81,15 @@ namespace MyLibrary.API.Controllers
         }
 
         /// <summary>
-        /// Criar um livro
+        /// Adicionar um novo livro
         /// </summary>
-        /// <param name="book"></param>
+        /// <param name="book">Dados do livro</param>
+        /// <returns></returns>
         /// <response code="201">Livro criado com sucesso</response>
+        /// <response code="500">Falha no servidor ou no banco de dados</response>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult> Post(Book book)
         {
             try
@@ -94,11 +105,18 @@ namespace MyLibrary.API.Controllers
         }
 
         /// <summary>
-        /// Editar campos de livro
+        /// Atualizar um livro existente
         /// </summary>
-        /// <param name="isbn"></param>
-        /// <param name="bookIn"></param>
+        /// <param name="isbn">ISBN do livro</param>
+        /// <param name="bookIn">Dados do livro atualizado</param>
+        /// <returns></returns>
+        /// <response code="204">Livro atualizado com sucesso</response>
+        /// <response code="404">Livro não encontrado</response>
+        /// <response code="500">Falha no servidor ou no banco de dados</response>
         [HttpPut("{isbn}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult> Put(string isbn, Book bookIn)
         {
             if (String.IsNullOrEmpty(isbn))
@@ -124,10 +142,17 @@ namespace MyLibrary.API.Controllers
         }
 
         /// <summary>
-        /// Excluir livro pelo ISBN
+        /// Excluir um livro
         /// </summary>
-        /// <param name="isbn"></param>
+        /// <param name="isbn">ISBN do livro</param>
+        /// <returns></returns>
+        /// <response code="204">Livro excluído com sucesso</response>
+        /// <response code="404">Livro não encontrado</response>
+        /// <response code="500">Falha no servidor ou no banco de dados</response>
         [HttpDelete("{isbn}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult> Delete(string isbn)
         {
             if (String.IsNullOrEmpty(isbn))
