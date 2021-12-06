@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{43087052
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocefara.LeilaoOnline.Core", "Ocefara.LeilaoOnline.Core\Ocefara.LeilaoOnline.Core.csproj", "{4638EF1E-7EB6-4905-9A32-676BE3C95F12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocefara.LeilaoOnline.ConsoleApp", "Ocefara.LeilaoOnline.ConsoleApp\Ocefara.LeilaoOnline.ConsoleApp.csproj", "{3295E7FB-3B99-48F7-84A1-C25303575374}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3295E7FB-3B99-48F7-84A1-C25303575374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3295E7FB-3B99-48F7-84A1-C25303575374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3295E7FB-3B99-48F7-84A1-C25303575374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3295E7FB-3B99-48F7-84A1-C25303575374}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12} = {2AC83B4E-D890-4FEF-9462-1E1784388B26}
+		{3295E7FB-3B99-48F7-84A1-C25303575374} = {43087052-CC65-481E-A454-E521D213ACE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07592538-392F-4A73-BFA3-A79D1E00CCC4}
