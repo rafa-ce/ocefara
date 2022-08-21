@@ -3,13 +3,13 @@ using Xunit;
 
 namespace Ocefara.LeilaoOnline.Tests
 {
-    public class LeilaoTestes
+    public class LeilaoTerminaPregao
     {
         [Theory]
         [InlineData(1200, new double[] { 800, 900, 1000, 1200})]
         [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
         [InlineData(800, new double[] { 800 })]
-        private void LeilaoComLances(double valorEsperado, double[] lances)
+        public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLance(double valorEsperado, double[] lances)
         { 
             // Arrange - cenário
             var leilao = new Leilao("Van Gogh");
@@ -28,7 +28,7 @@ namespace Ocefara.LeilaoOnline.Tests
         }
 
         [Fact]
-        private void LeilaoSemLances()
+        public void RetornaZeroDadoLeilaoSemLances()
         {
             // Arrange - cenário
             var leilao = new Leilao("Van Gogh");
@@ -41,6 +41,6 @@ namespace Ocefara.LeilaoOnline.Tests
             var valorObtido = leilao.Ganhador.Valor;
 
             Assert.Equal(valorEsperado, valorObtido);
-        }
+        }        
     }
 }
