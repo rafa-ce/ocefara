@@ -5,43 +5,39 @@ namespace Ocefara.LeilaoOnline.Tests
 {
     public class LeilaoTestes
     {
-        [Fact]
-        private void LeilaoComVariosLances()
+        [Theory]
+        [InlineData(1200, new double[] { 800, 900, 1000, 1200})]
+        [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
+        [InlineData(800, new double[] { 800 })]
+        private void LeilaoComLances(double valorEsperado, double[] lances)
         { 
             // Arrange - cenário
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
-            var maria = new Interessada("Maria", leilao);
-
-            leilao.RecebeLance(fulano, 800);
-            leilao.RecebeLance(maria, 900);
-            leilao.RecebeLance(fulano, 1000);
-            leilao.RecebeLance(fulano, 990);
-
+            
+            foreach(var lance in lances)
+                leilao.RecebeLance(fulano, lance);
+            
             // Act - método sob teste
             leilao.TerminaPregao();
 
             // Assert
-            var valorEsperado = 1000;
             var valorObtido = leilao.Ganhador.Valor;
 
             Assert.Equal(valorEsperado, valorObtido);
         }
 
         [Fact]
-        private static void LeilaoComApenasUmLance()
+        private void LeilaoSemLances()
         {
             // Arrange - cenário
             var leilao = new Leilao("Van Gogh");
-            var fulano = new Interessada("Fulano", leilao);
-
-            leilao.RecebeLance(fulano, 800);
 
             // Act - método sob teste
             leilao.TerminaPregao();
 
             // Assert
-            var valorEsperado = 800;
+            var valorEsperado = 0;
             var valorObtido = leilao.Ganhador.Valor;
 
             Assert.Equal(valorEsperado, valorObtido);

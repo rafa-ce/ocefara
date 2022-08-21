@@ -29,7 +29,9 @@ namespace Ocefara.LeilaoOnline.Core
 
         public void TerminaPregao()
         {
-            Ganhador = Lances.OrderBy(l => l.Valor).Last();
+            Ganhador = Lances
+                .DefaultIfEmpty(new Lance(null, 0))
+                .OrderBy(l => l.Valor).LastOrDefault();
         }
     }
 }
