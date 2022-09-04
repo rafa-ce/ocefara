@@ -13,6 +13,9 @@ namespace Ocefara.LeilaoOnline.Core
 
         public Lance(Interessada cliente, double valor)
         {
+            if (valor < 0)
+                throw new ArgumentException("Valor do lance não pode ser menor que zero");
+
             Cliente = cliente;
             Valor = valor;
         }
