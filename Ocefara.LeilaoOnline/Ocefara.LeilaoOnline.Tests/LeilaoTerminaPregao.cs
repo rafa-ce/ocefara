@@ -1,4 +1,5 @@
 ﻿using Ocefara.LeilaoOnline.Core;
+using System;
 using Xunit;
 
 namespace Ocefara.LeilaoOnline.Tests
@@ -36,10 +37,27 @@ namespace Ocefara.LeilaoOnline.Tests
         }
 
         [Fact]
+        public void RetornaInvalidOperationExceptionDadoPregaoNãoIniciado()
+        {
+            // Arrange - cenário
+            var leilao = new Leilao("Van Gogh");
+
+            // Assert
+            var excecaoObtida = Assert.Throws<InvalidOperationException>(
+                // Act - método sob teste
+                () => leilao.TerminaPregao()
+            );
+
+            var mensagemEsperada = "Não é possível terminar o pregão sem que ele tenha sido iniciado (utilizar método IniciaPregao())";
+            Assert.Equal(mensagemEsperada, excecaoObtida.Message);
+        }
+
+        [Fact]
         public void RetornaZeroDadoLeilaoSemLances()
         {
             // Arrange - cenário
             var leilao = new Leilao("Van Gogh");
+            leilao.IniciaPregao();
 
             // Act - método sob teste
             leilao.TerminaPregao();

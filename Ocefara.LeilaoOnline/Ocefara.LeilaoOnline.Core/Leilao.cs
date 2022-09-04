@@ -49,6 +49,8 @@ namespace Ocefara.LeilaoOnline.Core
 
         public void TerminaPregao()
         {
+            if (Estado != EstadoLeilao.LeilaoEmAndamento)
+                throw new InvalidOperationException("Não é possível terminar o pregão sem que ele tenha sido iniciado (utilizar método IniciaPregao())");
 
             Ganhador = Lances
                 .DefaultIfEmpty(new Lance(null, 0))
