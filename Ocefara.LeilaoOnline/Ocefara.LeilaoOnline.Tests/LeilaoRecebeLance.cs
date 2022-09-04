@@ -6,26 +6,27 @@ namespace Ocefara.LeilaoOnline.Tests
 {
     public class LeilaoRecebeLance
     {
-        [Fact]
-        public void NaoPermiteNovosLancesDadoLeilaoFinalizado()
+        [Theory]
+        [InlineData(4, new double[] { 1000, 1200, 1400, 1300 })]
+        [InlineData(2, new double[] { 800, 900 })]
+        public void NaoPermiteNovosLancesDadoLeilaoFinalizado(int qtdeEsperada, double[] ofertas)
         {
-            // Arrange - cenário
+            //Arranje - cenário
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
 
-            leilao.RecebeLance(fulano, 800);
-            leilao.RecebeLance(fulano, 900);
-
+            foreach (var valor in ofertas)
+            {
+                leilao.RecebeLance(fulano, valor);
+            }
             leilao.TerminaPregao();
-            
-            // Act - método sob teste
+
+            //Act - método sob teste
             leilao.RecebeLance(fulano, 1000);
 
-            // Assert
-            var valorEsperado = 2;
-            var valorObtido = leilao.Lances.Count();
-
-            Assert.Equal(valorEsperado, valorObtido);
+            //Assert
+            var qtdeObtida = leilao.Lances.Count();
+            Assert.Equal(qtdeEsperada, qtdeObtida);
         }
     }
 }
