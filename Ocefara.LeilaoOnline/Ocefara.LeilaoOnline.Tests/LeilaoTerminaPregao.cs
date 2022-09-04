@@ -9,15 +9,23 @@ namespace Ocefara.LeilaoOnline.Tests
         [InlineData(1200, new double[] { 800, 900, 1000, 1200})]
         [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
         [InlineData(800, new double[] { 800 })]
-        public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLance(double valorEsperado, double[] lances)
+        public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLance(double valorEsperado, double[] ofertas)
         { 
             // Arrange - cenário
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
-            
-            foreach(var lance in lances)
-                leilao.RecebeLance(fulano, lance);
-            
+            var maria = new Interessada("Maria", leilao);
+
+            leilao.IniciaPregao();
+            for (var i = 0; i < ofertas.Length; i++)
+            {
+                var valor = ofertas[i];
+                if ((i % 2) == 0)
+                    leilao.RecebeLance(fulano, valor);
+                else
+                    leilao.RecebeLance(maria, valor);
+            }
+
             // Act - método sob teste
             leilao.TerminaPregao();
 

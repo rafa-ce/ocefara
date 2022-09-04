@@ -8,11 +8,14 @@ namespace Ocefara.LeilaoOnline.Core
     {
         LeilaoEmAndamento,
         LeilaoFinalizado,
+        LeilaoAntesDoPregao
     }
 
     public class Leilao
     {
         private IList<Lance> _lances;
+        private Interessada _ultimoCliente;
+
         public IEnumerable<Lance> Lances => _lances;
         public string Peca { get; }
         public Lance Ganhador { get; private set; }
@@ -22,18 +25,26 @@ namespace Ocefara.LeilaoOnline.Core
         {
             Peca = peca;
             _lances = new List<Lance>();
-            Estado = EstadoLeilao.LeilaoEmAndamento;
+            Estado = EstadoLeilao.LeilaoAntesDoPregao;
         }
 
         public void RecebeLance(Interessada cliente, double valor)
         {
-            if (Estado == EstadoLeilao.LeilaoEmAndamento)
+            if (NovoLanceEhAceito(cliente, valor))
+            {
                 _lances.Add(new Lance(cliente, valor));
+                _ultimoCliente = cliente;
+            }
+        }
+
+        private bool NovoLanceEhAceito(Interessada cliente, double valor)
+        {
+            return (Estado == EstadoLeilao.LeilaoEmAndamento) && (cliente != _ultimoCliente);
         }
 
         public void IniciaPregao()
         {
-
+            Estado = EstadoLeilao.LeilaoEmAndamento;
         }
 
         public void TerminaPregao()

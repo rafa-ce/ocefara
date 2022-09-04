@@ -14,10 +14,16 @@ namespace Ocefara.LeilaoOnline.Tests
             //Arranje - cenário
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
+            var maria = new Interessada("Maria", leilao);
 
-            foreach (var valor in ofertas)
+            leilao.IniciaPregao();
+            for(var i = 0; i < ofertas.Length; i++)
             {
-                leilao.RecebeLance(fulano, valor);
+                var valor = ofertas[i];
+                if ((i % 2) == 0)
+                    leilao.RecebeLance(fulano, valor);
+                else
+                    leilao.RecebeLance(maria, valor);
             }
             leilao.TerminaPregao();
 
@@ -25,6 +31,24 @@ namespace Ocefara.LeilaoOnline.Tests
             leilao.RecebeLance(fulano, 1000);
 
             //Assert
+            var qtdeObtida = leilao.Lances.Count();
+            Assert.Equal(qtdeEsperada, qtdeObtida);
+        }
+
+        [Fact]
+        public void NãoAceitaProximoLanceDadoMesmoClienteDoLanceAnterior()
+        {
+            var leilao = new Leilao("Van Gogh");
+            var fulano = new Interessada("Fulano", leilao);
+
+            leilao.IniciaPregao();
+            leilao.RecebeLance(fulano, 800);            
+
+            //Act - método sob teste
+            leilao.RecebeLance(fulano, 1000);
+
+            //Assert
+            var qtdeEsperada = 1;
             var qtdeObtida = leilao.Lances.Count();
             Assert.Equal(qtdeEsperada, qtdeObtida);
         }
