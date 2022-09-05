@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2AC83B4E-D890-4FEF-9462-1E1784388B26}"
 EndProject
@@ -9,9 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{43087052
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocefara.LeilaoOnline.Core", "Ocefara.LeilaoOnline.Core\Ocefara.LeilaoOnline.Core.csproj", "{4638EF1E-7EB6-4905-9A32-676BE3C95F12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocefara.LeilaoOnline.ConsoleApp", "Ocefara.LeilaoOnline.ConsoleApp\Ocefara.LeilaoOnline.ConsoleApp.csproj", "{3295E7FB-3B99-48F7-84A1-C25303575374}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocefara.LeilaoOnline.Tests", "Ocefara.LeilaoOnline.Tests\Ocefara.LeilaoOnline.Tests.csproj", "{47D06AB2-73FF-4B22-98AF-1DA913C5A49B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocefara.LeilaoOnline.Tests", "Ocefara.LeilaoOnline.Tests\Ocefara.LeilaoOnline.Tests.csproj", "{47D06AB2-73FF-4B22-98AF-1DA913C5A49B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3295E7FB-3B99-48F7-84A1-C25303575374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3295E7FB-3B99-48F7-84A1-C25303575374}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3295E7FB-3B99-48F7-84A1-C25303575374}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3295E7FB-3B99-48F7-84A1-C25303575374}.Release|Any CPU.Build.0 = Release|Any CPU
 		{47D06AB2-73FF-4B22-98AF-1DA913C5A49B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{47D06AB2-73FF-4B22-98AF-1DA913C5A49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47D06AB2-73FF-4B22-98AF-1DA913C5A49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,7 +31,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4638EF1E-7EB6-4905-9A32-676BE3C95F12} = {2AC83B4E-D890-4FEF-9462-1E1784388B26}
-		{3295E7FB-3B99-48F7-84A1-C25303575374} = {43087052-CC65-481E-A454-E521D213ACE4}
 		{47D06AB2-73FF-4B22-98AF-1DA913C5A49B} = {43087052-CC65-481E-A454-E521D213ACE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
