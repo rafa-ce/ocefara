@@ -15,19 +15,19 @@ namespace Ocefara.LeilaoOnline.Core
     {
         private IList<Lance> _lances;
         private Interessada _ultimoCliente;
+        private IModalidadeAvaliacao _avaliador;
 
         public IEnumerable<Lance> Lances => _lances;
         public string Peca { get; }
         public Lance Ganhador { get; private set; }
         public EstadoLeilao Estado { get; private set; }
-        public double ValorDestino { get; }
 
-        public Leilao(string peca, double valorDestino = 0)
+        public Leilao(string peca, IModalidadeAvaliacao avaliador)
         {
             Peca = peca;
             _lances = new List<Lance>();
             Estado = EstadoLeilao.LeilaoAntesDoPregao;
-            ValorDestino = valorDestino;
+            _avaliador = avaliador;
         }
 
         public void RecebeLance(Interessada cliente, double valor)
@@ -54,21 +54,7 @@ namespace Ocefara.LeilaoOnline.Core
             if (Estado != EstadoLeilao.LeilaoEmAndamento)
                 throw new InvalidOperationException("Não é possível terminar o pregão sem que ele tenha sido iniciado (utilizar método IniciaPregao())");
 
-            if (ValorDestino > 0)
-            {
-                // modalidade oferta superior mais próxima
-                Ganhador = Lances
-                    .DefaultIfEmpty(new Lance(null, 0))
-                    .Where(l => l.Valor > ValorDestino)
-                    .OrderBy(l => l.Valor)
-                    .FirstOrDefault();
-            }
-            else
-            {
-                Ganhador = Lances
-                    .DefaultIfEmpty(new Lance(null, 0))
-                    .OrderBy(l => l.Valor).LastOrDefault();
-            }
+            Ganhador = _avaliador.Avalia(this);
 
             Estado = EstadoLeilao.LeilaoFinalizado;
         }
